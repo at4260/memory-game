@@ -6,3 +6,6 @@ Based off of the mini-project for Coursera's Intro to Interactive Programming in
 ### Implementation
 Instead of SimpleGUI, I will be creating the game using the more commonly used GUI package Tkinter.
 I will also be implementing OOP rather than the original function-based template provided by the course.
+
+### How to Play
+Git clone the repo, activate virtual env and install the dependencies, and run `python controller.py`.
