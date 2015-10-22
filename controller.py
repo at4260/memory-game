@@ -8,31 +8,32 @@ class GameBoard:
     """ This class initializes the game board by creating the frame. """
     def __init__(self, master):
 
-        frame = Tkinter.Canvas(master, width=800, height=100)
-        frame.grid()
+        self.frame = Tkinter.Canvas(master, width=800, height=100)
+        self.frame.grid()
 
-        self.restart = Tkinter.Button(frame, text="Restart", command=frame.quit)
+        self.restart = Tkinter.Button(self.frame, text="Restart", command=self.new_game)
         self.restart.grid(row=0, column=0)
-        Tkinter.Label(frame, text="Turns: %s" %(0)).grid(row=1, column=0)
+        Tkinter.Label(self.frame, text="Turns: %s" %(0)).grid(row=1, column=0)
 
         self.image = ImageTk.PhotoImage(file="card.png")
-        for i in range(12):
-            self.draw(frame, image=self.image, col=i+1)
+        for i in range(16):
+            self.draw_hidden(col=i+1)
 
-    def draw(self, frame, image, col):
-        self.card = Tkinter.Button(frame, image=image, command=frame.quit)
-        self.card.grid(row=0, column=col)
+    def draw_hidden(self, col=None):
+        card = Tkinter.Button(self.frame, image=self.image, command=self.frame.quit)
+        card.grid(row=0, column=col)
 
+    def draw_exposed(self, val, col=None):
+        card = Tkinter.Button(self.frame, text=val, command=self.frame.quit)
+        card.grid(row=0, column=col)
 
-# helper function to initialize globals
-def new_game():
-    pass
-
-
-# define event handlers
-def mouseclick(pos):
-    # add game state logic here
-    pass
+    def new_game(self):
+        print "Restarting"
+        values = range(1,9) * 2
+        random.shuffle(values)
+        print values
+        for i in range(16):
+            self.draw_exposed(val=values[i], col=i+1)
 
 
 # register event handlers
